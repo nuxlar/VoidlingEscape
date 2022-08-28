@@ -1,0 +1,10 @@
+﻿{
+	"name": "VoidlingEscape",
+	"version_number": "1.0.0",
+	"website_url": "",
+	"description": "Spawns Voidling during the moon escape sequence.",
+	"dependencies": [
+		"bbepis-BepInExPack-5.4.2102",
+		"RiskofThunder-HookGenPatcher-1.2.3"
+	]
+}

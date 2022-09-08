@@ -6,23 +6,29 @@ using UnityEngine.AddressableAssets;
 
 namespace VoidlingEscape
 {
-  [BepInPlugin("com.Nuxlar.VoidlingEscape", "VoidlingEscape", "1.0.0")]
+  [BepInPlugin("com.Nuxlar.VoidlingEscape", "VoidlingEscape", "1.0.1")]
 
   public class VoidlingEscape : BaseUnityPlugin
   {
     SpawnCard voidRaidCrabPhase2 = Addressables.LoadAssetAsync<SpawnCard>("RoR2/DLC1/VoidRaidCrab/cscMiniVoidRaidCrabPhase2.asset").WaitForCompletion();
     public void Awake()
     {
-      On.EntityStates.Missions.BrotherEncounter.BossDeath.OnEnter += BossDeath_OnEnter;
+      On.RoR2.HoldoutZoneController.Start += SpawnOnCharge;
     }
-    private void BossDeath_OnEnter(On.EntityStates.Missions.BrotherEncounter.BossDeath.orig_OnEnter orig, EntityStates.Missions.BrotherEncounter.BossDeath self)
+    private void SpawnOnCharge(On.RoR2.HoldoutZoneController.orig_Start orig, RoR2.HoldoutZoneController self)
     {
-      DirectorPlacementRule placementRule = new DirectorPlacementRule();
-      placementRule.placementMode = DirectorPlacementRule.PlacementMode.Direct;
-      DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(voidRaidCrabPhase2, placementRule, Run.instance.runRNG);
-      directorSpawnRequest.teamIndexOverride = new TeamIndex?(TeamIndex.Monster);
-      GameObject spawnedVoidRaidCrabPhase2 = voidRaidCrabPhase2.DoSpawn(new Vector3(386.5f, -174.8f, 462.8f), Quaternion.identity, directorSpawnRequest).spawnedInstance;
-      NetworkServer.Spawn(spawnedVoidRaidCrabPhase2);
+      // new Vector3(386.5f, -174.8f, 462.8f) tunnel
+      // new Vector3(231.1f, -174.7f, 296) ship open
+      // isboundsobjectivetoken OBJECTIVE_MOON_CHARGE_DROPSHIP
+      if (self.inBoundsObjectiveToken == "OBJECTIVE_MOON_CHARGE_DROPSHIP")
+      {
+        DirectorPlacementRule placementRule = new DirectorPlacementRule();
+        placementRule.placementMode = DirectorPlacementRule.PlacementMode.Direct;
+        DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(voidRaidCrabPhase2, placementRule, Run.instance.runRNG);
+        directorSpawnRequest.teamIndexOverride = new TeamIndex?(TeamIndex.Monster);
+        GameObject spawnedVoidRaidCrabPhase2 = voidRaidCrabPhase2.DoSpawn(new Vector3(231.1f, -174.7f, 296), Quaternion.identity, directorSpawnRequest).spawnedInstance;
+        NetworkServer.Spawn(spawnedVoidRaidCrabPhase2);
+      }
       orig(self);
     }
   }

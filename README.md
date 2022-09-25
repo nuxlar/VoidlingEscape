@@ -3,6 +3,11 @@
 Spawns Voidling during the moon escape sequence if you want a more challenging escape.
 
 ## Changelog
+**1.0.2**
+
+- Changes Voidlings team to void (i forgor)
+- Changes the spawn position a tad to the right
+
 **1.0.1**
 
 - Hooks into the ship TP instead of mithrix's death (spawns when you start charging the ship)

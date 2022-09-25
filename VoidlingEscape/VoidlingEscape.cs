@@ -18,15 +18,15 @@ namespace VoidlingEscape
     private void SpawnOnCharge(On.RoR2.HoldoutZoneController.orig_Start orig, RoR2.HoldoutZoneController self)
     {
       // new Vector3(386.5f, -174.8f, 462.8f) tunnel
-      // new Vector3(231.1f, -174.7f, 296) ship open
+      // new Vector3(235.2f, -174.7f, 311)
       // isboundsobjectivetoken OBJECTIVE_MOON_CHARGE_DROPSHIP
       if (self.inBoundsObjectiveToken == "OBJECTIVE_MOON_CHARGE_DROPSHIP")
       {
         DirectorPlacementRule placementRule = new DirectorPlacementRule();
         placementRule.placementMode = DirectorPlacementRule.PlacementMode.Direct;
         DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(voidRaidCrabPhase2, placementRule, Run.instance.runRNG);
-        directorSpawnRequest.teamIndexOverride = new TeamIndex?(TeamIndex.Monster);
-        GameObject spawnedVoidRaidCrabPhase2 = voidRaidCrabPhase2.DoSpawn(new Vector3(231.1f, -174.7f, 296), Quaternion.identity, directorSpawnRequest).spawnedInstance;
+        directorSpawnRequest.teamIndexOverride = new TeamIndex?(TeamIndex.Void);
+        GameObject spawnedVoidRaidCrabPhase2 = voidRaidCrabPhase2.DoSpawn(new Vector3(235.2f, -174.7f, 311), Quaternion.identity, directorSpawnRequest).spawnedInstance;
         NetworkServer.Spawn(spawnedVoidRaidCrabPhase2);
       }
       orig(self);

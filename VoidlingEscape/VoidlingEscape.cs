@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 
 namespace VoidlingEscape
 {
-  [BepInPlugin("com.Nuxlar.VoidlingEscape", "VoidlingEscape", "1.0.1")]
+  [BepInPlugin("com.Nuxlar.VoidlingEscape", "VoidlingEscape", "1.0.3")]
 
   public class VoidlingEscape : BaseUnityPlugin
   {
@@ -26,7 +26,8 @@ namespace VoidlingEscape
         placementRule.placementMode = DirectorPlacementRule.PlacementMode.Direct;
         DirectorSpawnRequest directorSpawnRequest = new DirectorSpawnRequest(voidRaidCrabPhase2, placementRule, Run.instance.runRNG);
         directorSpawnRequest.teamIndexOverride = new TeamIndex?(TeamIndex.Void);
-        GameObject spawnedVoidRaidCrabPhase2 = voidRaidCrabPhase2.DoSpawn(new Vector3(235.2f, -174.7f, 311), Quaternion.identity, directorSpawnRequest).spawnedInstance;
+        GameObject spawnedVoidRaidCrabPhase2 = voidRaidCrabPhase2.DoSpawn(new Vector3(235.2f, -150, 311), Quaternion.identity, directorSpawnRequest).spawnedInstance;
+        spawnedVoidRaidCrabPhase2.GetComponent<CharacterMaster>().isBoss = true;
         NetworkServer.Spawn(spawnedVoidRaidCrabPhase2);
       }
       orig(self);

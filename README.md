@@ -3,6 +3,11 @@
 Spawns Voidling during the moon escape sequence if you want a more challenging escape.
 
 ## Changelog
+**1.0.3**
+
+- Makes Voidling spawn as a boss
+- Changes the spawn position a tad upwards
+
 **1.0.2**
 
 - Changes Voidlings team to void (i forgor)
